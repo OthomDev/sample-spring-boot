@@ -21,7 +21,7 @@ pipeline {
                 script{
                     def scannerHome = tool 'scanner';
                       withSonarQubeEnv('SonarCloud') {
-                          sh "${scannerHome}/bin/sonar-scanner"
+                          sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=demo-othom -Dsonar.projectName=spring-boot -Dsonar.organization= test-othom  -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=src"
                       }
                 }
             }
