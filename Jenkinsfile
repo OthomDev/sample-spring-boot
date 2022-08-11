@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "othom/flask"
+        registry = "othom/springboot-app"
         registrycredential = 'dockerhub'
         dockerimage = ''
     }
