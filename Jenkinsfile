@@ -1,9 +1,10 @@
 pipeline {
     agent any
-    
-   
-    
-    
+    environment {
+        registry = "othom/flask"
+        registrycredential = 'dockerhub'
+        dockerimage = ''
+    }
     tools {
         maven 'Maven'
     }
@@ -45,7 +46,16 @@ pipeline {
                 sh 'mvn clean install'           
             }
         }
-        
+        stage('Build Image') {
+            steps {
+                script {
+                    // reference: https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+                    img = registry + ":${env.BUILD_ID}"
+                    // reference: https://docs.cloudbees.com/docs/admin-resources/latest/plugins/docker-workflow
+                    dockerImage = docker.build("${img}")
+                }
+            }
+        }
        
         
     }
