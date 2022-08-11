@@ -57,6 +57,16 @@ pipeline {
                 }
             }
         }
+        stage('Push To DockerHub') {
+            steps {
+                script {
+                    docker.withRegistry( 'https://registry.hub.docker.com ', registryCredential ) {
+                        // push image to registry
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
        
         
     }
